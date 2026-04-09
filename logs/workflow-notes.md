@@ -1,0 +1,148 @@
+# Workflow Notes 
+## Moonlit Harvest: Хранитель Грани
+
+### Базовые параметры (Fixed)
+
+| Параметр | Значение | Примечание |
+| :--- | :--- | :--- |
+| **Checkpoint** | SDXL Base 1.0 | Основной чекпоинт |
+| **VAE** | sdxl_vae.safetensors | Если доступен отдельный |
+| **Sampler** | DPM++ 2M Karras | Рекомендуется для SDXL |
+| **Scheduler** | Karras | Стандарт для SDXL |
+| **Steps** | 30 | Баланс качество/скорость |
+| **CFG Scale** | 7.0 | Среднее следование промпту |
+| **Latent Size** | 1024x1024 | Native SDXL resolution |
+| **Seed** | 42424242 | ФИКСИРОВАТЬ для воспроизводимости |
+
+### Workflow Graph Structure
+Load Checkpoint → CLIP Text Encode (Positive) → KSampler → VAE Decode → Save Image  
+ ↘ CLIP Text Encode (Negative) ↗  
+↑ Empty Latent Image
+
+---
+
+### Генерация по ассетам
+
+#### Asset 01: Главный экран (Main Menu — Farm by Day)
+
+| Параметр | Значение |
+| :--- | :--- |
+| **Prompt** | `pixel art game main menu, top-down isometric farm view, morning on the farm, player house with smoke from chimney, glowing crops in garden beds, dark forest background, pale moon silhouette in daytime sky, golden pixel text "MOONLIT HARVEST" at top, cozy mysterious atmosphere, #191c21 shadows with #ffa800 accents, retro 32bit style` |
+| **Seed** | `42424242` |
+| **Variations** | CFG: `6.0 → 7.0 → 8.0` |
+| **Выбранный вариант** | CFG `7.0` — лучший баланс между детализацией фермы и читаемостью силуэтов |
+| **Вывод** | Изометрия фермы передана хорошо, но логотип с текстом SDXL сгенерировал нечитаемо. Текст будет добавлен вручную в Aseprite/Figma. |
+
+#### Asset 02: Боевая сцена (Combat — Perfect Dodge in Lunar Forest)
+
+| Параметр | Значение |
+| :--- | :--- |
+| **Prompt** | `pixel art combat scene, night lunar forest, farmer in lunar gear dodging left from shadow wolf attack, golden #ffa800 perfect dodge flash, slow motion visual effect with motion lines, glowing moon flowers on ground, player character with glowing golden eyes, dark #191c21 background with amber accents, tense beautiful atmosphere, retro 32bit style` |
+| **Seed** | `42424243` |
+| **Variations** | Steps: `25 → 30 → 35` |
+| **Выбранный вариант** | Steps `30` — достаточно деталей для динамики, без перешарпа |
+| **Вывод** | Золотая вспышка и эффект замедления переданы хорошо. Pixel art местами размывается из-за motion lines, но это стилистически допустимо. |
+
+#### Asset 03: Экран смерти (Death Screen — You Died)
+
+| Параметр | Значение |
+| :--- | :--- |
+| **Prompt** | `pixel art game over screen, dark purple-black background with crack effects, large text "YOU DIED" in red #ff4444 pixel font with glow, run statistics below: "Moon Dust: 350 -> lost 175 (50%)", "Night Crops: 5 -> lost 5", "Floors cleared: 12", pulsing golden #ffa800 moon dust icon at bottom, small "Return to Farm" pixel button, dark souls vibe, minimal UI` |
+| **Seed** | `42424244` |
+| **Variations** | Sampler: `Euler → DPM++ 2M Karras` |
+| **Выбранный вариант** | `DPM++ 2M Karras` — чище рендерит геометрию трещин и рамок |
+| **Вывод** | SDXL плохо генерирует читаемый текст и кнопки. Текст и UI элементы будут добавляться вручную в Aseprite/Figma. Атмосфера и цветовая гамма переданы корректно. |
+
+#### Asset 04: Лунный Лорд (Boss — Black Moon Guardian)
+
+| Параметр | Значение |
+| :--- | :--- |
+| **Prompt** | `pixel art boss scene, Black Moon Guardian creature 96x96 pixels, translucent purple shadow body with golden #ffa800 glowing eyes, floating moon crystals around, player character 32x32 silhouette below ready to fight, Eclipse Temple background, giant Black Moon with golden ring behind boss, epic threatening atmosphere, dark fantasy pixel art, retro 32bit style` |
+| **Seed** | `42424245` |
+| **Variations** | Latent Size: `768x768 → 1024x1024` |
+| **Выбранный вариант** | `1024x1024` — лучше передаёт детали босса и фоновой Луны |
+| **Вывод** | Босс читается отлично, полупрозрачность и свечение глаз переданы корректно. Игрок (маленький силуэт) теряется на фоне — это нормально для масштаба босса. |
+
+#### Asset 05: Легендарный артефакт (Item Icon — Heart of the Moon)
+
+| Параметр | Значение |
+| :--- | :--- |
+| **Prompt** | `pixel art item icon 64x64, Heart of the Moon artifact, pulsing golden #ffa800 heart-shaped crystal, glowing lunar particles around, purple relic rarity border, dark #191c21 background with faint tree silhouettes, pixel text "HEART OF THE MOON" below, magical valuable atmosphere, game inventory style, retro pixel art` |
+| **Seed** | `42424246` |
+| **Variations** | Latent Size: `512x512 → 1024x1024` |
+| **Выбранный вариант** | `1024x1024` с последующим ресайзом до 64x64 в Aseprite |
+| **Вывод** | Иконка читается отлично, свечение и ранг (фиолетовая рамка) переданы корректно. Текст названия будет добавлен вручную. |
+
+---
+
+### Итоги и выводы (Iteration 1)
+
+| Вопрос | Ответ |
+| :--- | :--- |
+| **Что получилось лучше всего?** | Asset 05 (Heart of the Moon) — чёткий pixel art, точная палитра (#ffa800 + #191c21), готов к использованию как референс для спрайт-листа |
+| **Что требует доработки?** | Текст на UI экранах (Asset 01, 03, 05) — SDXL не предназначен для типографики, текст будет добавляться вручную |
+| **Какой checkpoint использовать дальше?** | `SDXL Base 1.0` + тест специализированных Pixel Art моделей (PixelArt-XL, RetroDiffusion) для улучшения чёткости пикселей |
+| **Что менять в следующей итерации?** | Добавить ControlNet (OpenPose) для контроля позы игрока и босса. Усилить золотые акценты в промптах. |
+| **Воспроизводимость** | ✅ Seed зафиксирован, workflow сохранён, параметры задокументированы |
+
+---
+
+## Итерация 2: Корректировка под геймплейный вид
+
+**Причина:** Первые генерации выглядели как концепт-арты/постеры, а не как скриншоты из игры. Для Moonlit Harvest важно передать разницу между дневным (уютным) и ночным (напряжённым) геймплеем.
+
+**Изменения в промптах:**
+
+| Ассет | Что изменено | Почему |
+| :--- | :--- | :--- |
+| **Asset 01** | Добавлены `gameplay screenshot`, `top-down perspective`, `inventory UI elements`. Убран `cinematic`. | Экран главного меню должен напоминать реальный геймплей фермы |
+| **Asset 02** | Добавлены `over-the-shoulder perspective`, `dodge mechanic visible`, `health bar`. Убран `slow motion effect`. | Боевая сцена должна демонстрировать механику свайпов и интерфейс |
+| **Asset 03** | Сфокусирован на `UI layout`, `semi-transparent overlay`, `statistics panel`. | Текст будет добавляться вручную (стандартный пайплайн для AI-UI) |
+| **Asset 04** | Добавлены `phase 2 of boss fight`, `player small silhouette at bottom`. CFG повышен до `8.0`. | Босс должен выглядеть эпично, но игрок должен быть виден для масштаба |
+| **Asset 05** | Заменён материал на `crystal`, `pulsing glow`, `lunar particles`. Добавлен negative `plastic, glass, toy`. | Артефакт должен выглядеть как магический кристалл, а не как пластиковая безделушка |
+
+**Результат:**
+
+- **Asset 01:** Композиция стала ближе к реальному интерфейсу Stardew Valley. Ферма читается, логотип добавлен постфактум.
+- **Asset 02:** Динамика боя передана хорошо, полоска здоровья и золотая вспышка уклонения видны чётко.
+- **Asset 03:** Экран смерти готов к наложению текста — тёмный фон, трещины, пульсирующая иконка Лунной пыльцы.
+- **Asset 04:** Босс приобрёл вес и детализацию. Чёрная Луна на заднем плане добавляет эпичности.
+- **Asset 05:** Кристалл выглядит как артефакт, свечение и частицы переданы корректно.
+
+---
+
+### Итоги и выводы (Iteration 2)
+
+| Вопрос | Ответ |
+| :--- | :--- |
+| **Что получилось лучше всего?** | Asset 05 (Heart of the Moon) и Asset 04 (Black Moon Guardian) — оба соответствуют палитре, стилю и атмосфере игры |
+| **Что требует доработки?** | Asset 02 (боевая сцена) — motion blur иногда размывает пиксели. Возможно, стоит уменьшить интенсивность эффекта или генерировать без него, добавляя постфактум |
+| **Какой checkpoint использовать дальше?** | `SDXL Base 1.0` + тест `PixelArt-XL` для Asset 02 (боевая сцена) — нужно больше чёткости |
+| **Что менять в следующей итерации?** | Добавить ControlNet (Depth) для контроля композиции босс-файтов. Усилить контраст между дневными и ночными кадрами |
+| **Воспроизводимость** | ✅ Seed зафиксирован (42424242-42424246), workflow сохранён, изменения задокументированы |
+
+---
+
+### Сводная таблица всех генераций
+
+| # | Ассет | Seed | CFG | Steps | Sampler | Статус |
+|---|-------|------|-----|-------|---------|--------|
+| 01 | Главный экран | 42424242 | 7.0 | 30 | DPM++ 2M Karras | ✅ Готов (текст постфактум) |
+| 02 | Боевая сцена | 42424243 | 7.0 | 30 | DPM++ 2M Karras | ⚠️ Требуется доработка (motion blur) |
+| 03 | Экран смерти | 42424244 | 7.0 | 30 | DPM++ 2M Karras | ✅ Готов (текст постфактум) |
+| 04 | Лунный Лорд | 42424245 | 8.0 | 35 | DPM++ 2M Karras | ✅ Готов |
+| 05 | Сердце Луны | 42424246 | 7.0 | 30 | DPM++ 2M Karras | ✅ Готов |
+
+---
+
+### Рекомендации для следующей сессии генерации
+
+1. **Использовать специализированный Pixel Art чекпоинт** — например, `PixelArt-XL` или `RetroDiffusion` для улучшения чёткости пикселей в боевых сценах.
+2. **Добавить ControlNet (Depth или OpenPose)** — для контроля позы игрока и босса в Asset 04.
+3. **Разделить генерацию на слои** — фон, персонаж, UI. Склеивать в Aseprite/Photoshop.
+4. **Текст генерировать отдельно** — использовать Figma или Aseprite для наложения пиксельного шрифта поверх UI экранов.
+5. **Сохранять промежуточные варианты** — для Asset 02 (боевая сцена) сгенерировать 2-3 варианта с разными эффектами и выбрать лучший.
+
+---
+
+*Конец документа*
