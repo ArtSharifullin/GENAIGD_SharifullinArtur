@@ -3,16 +3,16 @@
 
 ### Базовые параметры (Fixed)
 
-| Параметр | Значение | Примечание |
-| :--- | :--- | :--- |
-| **Checkpoint** | SDXL Base 1.0 | Основной чекпоинт |
-| **VAE** | sdxl_vae.safetensors | Если доступен отдельный |
-| **Sampler** | DPM++ 2M Karras | Рекомендуется для SDXL |
-| **Scheduler** | Karras | Стандарт для SDXL |
-| **Steps** | 30 | Баланс качество/скорость |
-| **CFG Scale** | 7.0 | Среднее следование промпту |
-| **Latent Size** | 1024x1024 | Native SDXL resolution |
-| **Seed** | 42424242 | ФИКСИРОВАТЬ для воспроизводимости |
+| Параметр        | Значение             | Примечание                        |
+| :-------------- | :------------------- | :-------------------------------- |
+| **Checkpoint**  | SDXL Base 1.0        | Основной чекпоинт                 |
+| **VAE**         | sdxl_vae.safetensors | Если доступен отдельный           |
+| **Sampler**     | DPM++ 2M Karras      | Рекомендуется для SDXL            |
+| **Scheduler**   | Karras               | Стандарт для SDXL                 |
+| **Steps**       | 30                   | Баланс качество/скорость          |
+| **CFG Scale**   | 7.0                  | Среднее следование промпту        |
+| **Latent Size** | 1024x1024            | Native SDXL resolution            |
+| **Seed**        | 42424242             | ФИКСИРОВАТЬ для воспроизводимости |
 
 ### Workflow Graph Structure
 Load Checkpoint → CLIP Text Encode (Positive) → KSampler → VAE Decode → Save Image  
@@ -25,53 +25,53 @@ Load Checkpoint → CLIP Text Encode (Positive) → KSampler → VAE Decode → 
 
 #### Asset 01: Главный экран (Main Menu — Farm by Day)
 
-| Параметр | Значение |
-| :--- | :--- |
-| **Prompt** | `pixel art game main menu, top-down isometric farm view, morning on the farm, player house with smoke from chimney, glowing crops in garden beds, dark forest background, pale moon silhouette in daytime sky, golden pixel text "MOONLIT HARVEST" at top, cozy mysterious atmosphere, #191c21 shadows with #ffa800 accents, retro 32bit style` |
-| **Seed** | `42424242` |
-| **Variations** | CFG: `6.0 → 7.0 → 8.0` |
-| **Выбранный вариант** | CFG `7.0` — лучший баланс между детализацией фермы и читаемостью силуэтов |
-| **Вывод** | Изометрия фермы передана хорошо, но логотип с текстом SDXL сгенерировал нечитаемо. Текст будет добавлен вручную в Aseprite/Figma. |
+| Параметр              | Значение                                                                                                                                                                                                                                                                                                                                        |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prompt**            | `pixel art game main menu, top-down isometric farm view, morning on the farm, player house with smoke from chimney, glowing crops in garden beds, dark forest background, pale moon silhouette in daytime sky, golden pixel text "MOONLIT HARVEST" at top, cozy mysterious atmosphere, #191c21 shadows with #ffa800 accents, retro 32bit style` |
+| **Seed**              | `42424242`                                                                                                                                                                                                                                                                                                                                      |
+| **Variations**        | CFG: `6.0 → 7.0 → 8.0`                                                                                                                                                                                                                                                                                                                          |
+| **Выбранный вариант** | CFG `7.0` — лучший баланс между детализацией фермы и читаемостью силуэтов                                                                                                                                                                                                                                                                       |
+| **Вывод**             | Изометрия фермы передана хорошо, но логотип с текстом SDXL сгенерировал нечитаемо. Текст будет добавлен вручную в Aseprite/Figma.                                                                                                                                                                                                               |
 
 #### Asset 02: Боевая сцена (Combat — Perfect Dodge in Lunar Forest)
 
-| Параметр | Значение |
-| :--- | :--- |
-| **Prompt** | `pixel art combat scene, night lunar forest, farmer in lunar gear dodging left from shadow wolf attack, golden #ffa800 perfect dodge flash, slow motion visual effect with motion lines, glowing moon flowers on ground, player character with glowing golden eyes, dark #191c21 background with amber accents, tense beautiful atmosphere, retro 32bit style` |
-| **Seed** | `42424243` |
-| **Variations** | Steps: `25 → 30 → 35` |
-| **Выбранный вариант** | Steps `30` — достаточно деталей для динамики, без перешарпа |
-| **Вывод** | Золотая вспышка и эффект замедления переданы хорошо. Pixel art местами размывается из-за motion lines, но это стилистически допустимо. |
+| Параметр              | Значение                                                                                                                                                                                                                                                                                                                                                       |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prompt**            | `pixel art combat scene, night lunar forest, farmer in lunar gear dodging left from shadow wolf attack, golden #ffa800 perfect dodge flash, slow motion visual effect with motion lines, glowing moon flowers on ground, player character with glowing golden eyes, dark #191c21 background with amber accents, tense beautiful atmosphere, retro 32bit style` |
+| **Seed**              | `42424243`                                                                                                                                                                                                                                                                                                                                                     |
+| **Variations**        | Steps: `25 → 30 → 35`                                                                                                                                                                                                                                                                                                                                          |
+| **Выбранный вариант** | Steps `30` — достаточно деталей для динамики, без перешарпа                                                                                                                                                                                                                                                                                                    |
+| **Вывод**             | Золотая вспышка и эффект замедления переданы хорошо. Pixel art местами размывается из-за motion lines, но это стилистически допустимо.                                                                                                                                                                                                                         |
 
 #### Asset 03: Экран смерти (Death Screen — You Died)
 
-| Параметр | Значение |
-| :--- | :--- |
-| **Prompt** | `pixel art game over screen, dark purple-black background with crack effects, large text "YOU DIED" in red #ff4444 pixel font with glow, run statistics below: "Moon Dust: 350 -> lost 175 (50%)", "Night Crops: 5 -> lost 5", "Floors cleared: 12", pulsing golden #ffa800 moon dust icon at bottom, small "Return to Farm" pixel button, dark souls vibe, minimal UI` |
-| **Seed** | `42424244` |
-| **Variations** | Sampler: `Euler → DPM++ 2M Karras` |
-| **Выбранный вариант** | `DPM++ 2M Karras` — чище рендерит геометрию трещин и рамок |
-| **Вывод** | SDXL плохо генерирует читаемый текст и кнопки. Текст и UI элементы будут добавляться вручную в Aseprite/Figma. Атмосфера и цветовая гамма переданы корректно. |
+| Параметр              | Значение                                                                                                                                                                                                                                                                                                                                                                |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prompt**            | `pixel art game over screen, dark purple-black background with crack effects, large text "YOU DIED" in red #ff4444 pixel font with glow, run statistics below: "Moon Dust: 350 -> lost 175 (50%)", "Night Crops: 5 -> lost 5", "Floors cleared: 12", pulsing golden #ffa800 moon dust icon at bottom, small "Return to Farm" pixel button, dark souls vibe, minimal UI` |
+| **Seed**              | `42424244`                                                                                                                                                                                                                                                                                                                                                              |
+| **Variations**        | Sampler: `Euler → DPM++ 2M Karras`                                                                                                                                                                                                                                                                                                                                      |
+| **Выбранный вариант** | `DPM++ 2M Karras` — чище рендерит геометрию трещин и рамок                                                                                                                                                                                                                                                                                                              |
+| **Вывод**             | SDXL плохо генерирует читаемый текст и кнопки. Текст и UI элементы будут добавляться вручную в Aseprite/Figma. Атмосфера и цветовая гамма переданы корректно.                                                                                                                                                                                                           |
 
 #### Asset 04: Лунный Лорд (Boss — Black Moon Guardian)
 
-| Параметр | Значение |
-| :--- | :--- |
-| **Prompt** | `pixel art boss scene, Black Moon Guardian creature 96x96 pixels, translucent purple shadow body with golden #ffa800 glowing eyes, floating moon crystals around, player character 32x32 silhouette below ready to fight, Eclipse Temple background, giant Black Moon with golden ring behind boss, epic threatening atmosphere, dark fantasy pixel art, retro 32bit style` |
-| **Seed** | `42424245` |
-| **Variations** | Latent Size: `768x768 → 1024x1024` |
-| **Выбранный вариант** | `1024x1024` — лучше передаёт детали босса и фоновой Луны |
-| **Вывод** | Босс читается отлично, полупрозрачность и свечение глаз переданы корректно. Игрок (маленький силуэт) теряется на фоне — это нормально для масштаба босса. |
+| Параметр              | Значение                                                                                                                                                                                                                                                                                                                                                                    |
+| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Prompt**            | `pixel art boss scene, Black Moon Guardian creature 96x96 pixels, translucent purple shadow body with golden #ffa800 glowing eyes, floating moon crystals around, player character 32x32 silhouette below ready to fight, Eclipse Temple background, giant Black Moon with golden ring behind boss, epic threatening atmosphere, dark fantasy pixel art, retro 32bit style` |
+| **Seed**              | `42424245`                                                                                                                                                                                                                                                                                                                                                                  |
+| **Variations**        | Latent Size: `768x768 → 1024x1024`                                                                                                                                                                                                                                                                                                                                          |
+| **Выбранный вариант** | `1024x1024` — лучше передаёт детали босса и фоновой Луны                                                                                                                                                                                                                                                                                                                    |
+| **Вывод**             | Босс читается отлично, полупрозрачность и свечение глаз переданы корректно. Игрок (маленький силуэт) теряется на фоне — это нормально для масштаба босса.                                                                                                                                                                                                                   |
 
 #### Asset 05: Легендарный артефакт (Item Icon — Heart of the Moon)
 
-| Параметр | Значение |
-| :--- | :--- |
-| **Prompt** | `pixel art item icon 64x64, Heart of the Moon artifact, pulsing golden #ffa800 heart-shaped crystal, glowing lunar particles around, purple relic rarity border, dark #191c21 background with faint tree silhouettes, pixel text "HEART OF THE MOON" below, magical valuable atmosphere, game inventory style, retro pixel art` |
-| **Seed** | `42424246` |
-| **Variations** | Latent Size: `512x512 → 1024x1024` |
-| **Выбранный вариант** | `1024x1024` с последующим ресайзом до 64x64 в Aseprite |
-| **Вывод** | Иконка читается отлично, свечение и ранг (фиолетовая рамка) переданы корректно. Текст названия будет добавлен вручную. |
+| Параметр              | Значение                                                                                                                                                                                                                                                                                                                        |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Prompt**            | `pixel art item icon 64x64, Heart of the Moon artifact, pulsing golden #ffa800 heart-shaped crystal, glowing lunar particles around, purple relic rarity border, dark #191c21 background with faint tree silhouettes, pixel text "HEART OF THE MOON" below, magical valuable atmosphere, game inventory style, retro pixel art` |
+| **Seed**              | `42424246`                                                                                                                                                                                                                                                                                                                      |
+| **Variations**        | Latent Size: `512x512 → 1024x1024`                                                                                                                                                                                                                                                                                              |
+| **Выбранный вариант** | `1024x1024` с последующим ресайзом до 64x64 в Aseprite                                                                                                                                                                                                                                                                          |
+| **Вывод**             | Иконка читается отлично, свечение и ранг (фиолетовая рамка) переданы корректно. Текст названия будет добавлен вручную.                                                                                                                                                                                                          |
 
 ---
 
@@ -144,5 +144,3 @@ Load Checkpoint → CLIP Text Encode (Positive) → KSampler → VAE Decode → 
 5. **Сохранять промежуточные варианты** — для Asset 02 (боевая сцена) сгенерировать 2-3 варианта с разными эффектами и выбрать лучший.
 
 ---
-
-*Конец документа*
