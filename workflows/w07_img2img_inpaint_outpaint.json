@@ -1,0 +1,31 @@
+{
+  "lesson": "HW07",
+  "project": "Moonlit Harvest: Хранитель Грани",
+  "workflow_type": "img2img_inpaint_outpaint",
+  "pipeline_blocks": [
+    "load_image",
+    "img2img",
+    "inpaint_mask",
+    "outpaint_canvas_expand",
+    "sampler",
+    "decode",
+    "save_image"
+  ],
+  "tests": {
+    "img2img_denoise": [
+      0.35,
+      0.5,
+      0.65
+    ],
+    "inpaint_zone": "hero silhouette and edge cleanup",
+    "outpaint_direction": "right and top"
+  },
+  "selected_targets": [
+    "img2img-before",
+    "img2img-after",
+    "inpaint-before",
+    "inpaint-after",
+    "outpaint-after"
+  ],
+  "notes_ref": "logs/workflow-notes.md"
+}

@@ -46,15 +46,15 @@
 
 ---
 
-## Shot 05: Легендарный Артефакт (Legendary Item — Heart of the Moon)
+## Shot 05: Anchor Персонаж (Hero Portrait — Elian)
 
 |Параметр|Значение|
 |---|---|
-|**Название**|Сердце Луны (Ключ к финальному боссу)|
-|**Описание кадра**|Крупный план артефакта в инвентаре. Сердце Луны — пульсирующий золотой кристалл в форме сердца (#ffa800), окружённый светящимися лунными частицами. Вокруг кристалла — фиолетовая рамка (редкость "Реликвия"). На заднем плане — тёмный фон с едва заметными силуэтами деревьев. Внизу — название "HEART OF THE MOON" пиксельным шрифтом.|
-|**Настроение**|Ценность, магия, финальная цель|
-|**Технические детали**|Разрешение: 512x512 (иконка)  <br>Стиль: Item icon, pixel art  <br>Редкость: Фиолетовая/золотая рамка (Реликвия)  <br>Референсы: Moonlighter (предметы), Stardew Valley (артефакты)|
-|**Промпт (EN)**|`pixel art item icon 64x64, Heart of the Moon artifact, pulsing golden #ffa800 heart-shaped crystal, glowing lunar particles around, purple relic rarity border, dark #191c21 background with faint tree silhouettes, pixel text "HEART OF THE MOON" below, magical valuable atmosphere, game inventory style, retro pixel art --ar 1:1 --v 6`|
+|**Название**|Элиан — Хранитель Грани (базовый персонажный кадр)|
+|**Описание кадра**|Поясной портрет героя Элиана в ночном режиме. Тёмный плащ с капюшоном, читаемый силуэт лица, на груди светится лунный талисман (#ffa800). На фоне — тёмный лес (#191c21) с мягкими небесными акцентами (#88ccff). Композиция должна показывать героя как главный anchor для серии A/B.|
+|**Настроение**|Напряжённый, собранный, но с ощущением лунной магии и надежды|
+|**Технические детали**|Разрешение: 1024x1024  <br>Стиль: Character concept, pixel art  <br>Ракурс: 3/4, поясной портрет  <br>Референсы: Hyper Light Drifter (силуэт), Stardew Valley (читаемость)|
+|**Промпт (EN)**|`pixel art hero portrait, Elian guardian-farmer, dark cloak #1a2a4a, hooded face, lunar talisman on chest glowing #ffa800, subtle #88ccff rim light, dark #191c21 forest background, readable silhouette, retro 32bit style, atmospheric but clean composition --ar 1:1 --v 6`|
 
 ---
 
@@ -66,4 +66,14 @@
 |**02**|Лунный танец|Combat|1920x1080|#191c21, #ffa800, #ff4444|
 |**03**|Тьма победила|UI Screen|1920x1080|#000000, #ff4444, #ffa800|
 |**04**|Хранитель Чёрной Луны|Boss Sprite|1920x1080|#191c21, #ffa800, #9944ff|
-|**05**|Сердце Луны|Item Icon|512x512|#191c21, #ffa800, #9944ff|
+|**05**|Элиан — Anchor Portrait|Character|1024x1024|#191c21, #ffa800, #88ccff|
+
+---
+
+## W07 кандидаты на доработку (img2img / inpaint / outpaint)
+
+| Shot ID | Кандидат | Источник | Прием улучшения | Что нужно дотянуть | Следующий контроль |
+|---|---|---|---|---|---|
+| SH-W07-01 | Боевая сцена героя против тени | Shot 02 | `img2img` (denoise 0.35/0.5/0.65) | Чище контур героя и читаемая поза уклонения | `pose` |
+| SH-W07-02 | Экран смерти с локальной правкой UI-зоны | Shot 03 | `inpaint` | Локально вычистить артефакты и удержать драматический фокус | `canny` |
+| SH-W07-03 | Сцена с Лунным Лордом в расширенной композиции | Shot 04 | `outpaint` | Добавить пространство справа/сверху под композицию midterm-кадра | `depth` |
