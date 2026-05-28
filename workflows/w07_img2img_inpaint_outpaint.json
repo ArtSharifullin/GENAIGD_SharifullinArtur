@@ -1,31 +1,1075 @@
 {
-  "lesson": "HW07",
-  "project": "Moonlit Harvest: Хранитель Грани",
-  "workflow_type": "img2img_inpaint_outpaint",
-  "pipeline_blocks": [
-    "load_image",
-    "img2img",
-    "inpaint_mask",
-    "outpaint_canvas_expand",
-    "sampler",
-    "decode",
-    "save_image"
+  "id": "w07_img2img_inpaint_outpaint",
+  "revision": 0,
+  "last_node_id": 18,
+  "last_link_id": 28,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -760,
+        -120
+      ],
+      "size": [
+        315,
+        130.65625
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1,
+            9,
+            17
+          ]
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2,
+            3
+          ]
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            4,
+            12,
+            20
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "sd_xl_base_1.0.safetensors"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -420,
+        -220
+      ],
+      "size": [
+        400,
+        180
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            5,
+            13,
+            21
+          ]
+        }
+      ],
+      "title": "positive_archive_style",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "pixel art combat scene, night lunar forest, Elian guardian-farmer in dark lunar cloak #1a2a4a,\ndodging left from shadow wolf attack, golden #ffa800 perfect dodge flash, small motion lines only,\nglowing moon flowers on ground, player golden glowing eyes, dark #191c21 background,\nreadable character silhouette, gameplay screenshot composition, side view combat,\ntense beautiful atmosphere, retro 32bit pixel art, #191c21 dark background, #ffa800 moon glow accents, #88ccff sky magic accents,\n#1a2a4a cloak tones, pixel art, retro 32bit game art, readable silhouette,\nnearest neighbor style, no anti-aliasing, lunar fantasy mood"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -420,
+        0
+      ],
+      "size": [
+        400,
+        150
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            6,
+            14,
+            22
+          ]
+        }
+      ],
+      "title": "negative_style_breaks",
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "low quality, blurry, text, watermark, logo, deformed anatomy, extra limbs, bad hands,\ncropped, duplicate elements, photorealistic, 3d render, bright neon colors, cartoon, anime,\ncute, happy, daylight, sunny, ugly, distorted, disfigured, poor details, bad art,\noversaturated, motion blur, smeared pixels, soft focus, anti-aliasing, smooth gradients"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "LoadImage",
+      "pos": [
+        -760,
+        140
+      ],
+      "size": [
+        315,
+        340
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 4,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null
+        }
+      ],
+      "title": "img2img_source",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "04_moon_lord_boss_seed42424242.png",
+        "image"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "VAEEncode",
+      "pos": [
+        -380,
+        220
+      ],
+      "size": [
+        225,
+        72
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 6,
+      "type": "KSampler",
+      "pos": [
+        -80,
+        160
+      ],
+      "size": [
+        315,
+        317.3125
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 5
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 6
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "title": "img2img_sampler_denoise_055",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        24071377,
+        "fixed",
+        30,
+        6.5,
+        "dpmpp_2m",
+        "karras",
+        0.55
+      ]
+    },
+    {
+      "id": 7,
+      "type": "VAEDecode",
+      "pos": [
+        280,
+        170
+      ],
+      "size": [
+        225,
+        72
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 10
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 8,
+      "type": "SaveImage",
+      "pos": [
+        560,
+        160
+      ],
+      "size": [
+        270,
+        84
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 4,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11
+        }
+      ],
+      "outputs": [],
+      "title": "save_img2img_after",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "w07_img2img_after"
+      ]
+    },
+    {
+      "id": 9,
+      "type": "LoadImage",
+      "pos": [
+        -760,
+        520
+      ],
+      "size": [
+        315,
+        340
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            15
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "title": "inpaint_source_with_mask",
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "04_moon_lord_boss_seed42424242.png",
+        "image"
+      ]
+    },
+    {
+      "id": 10,
+      "type": "VAEEncodeForInpaint",
+      "pos": [
+        -380,
+        560
+      ],
+      "size": [
+        260,
+        128
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 15
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 16
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "title": "inpaint_foreground_shard_mask",
+      "properties": {
+        "Node name for S&R": "VAEEncodeForInpaint"
+      },
+      "widgets_values": [
+        6
+      ]
+    },
+    {
+      "id": 11,
+      "type": "KSampler",
+      "pos": [
+        -80,
+        520
+      ],
+      "size": [
+        315,
+        317.3125
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 13
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 14
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 18
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "title": "inpaint_sampler",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        24071377,
+        "fixed",
+        30,
+        6.5,
+        "dpmpp_2m",
+        "karras",
+        0.72
+      ]
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [
+        280,
+        540
+      ],
+      "size": [
+        225,
+        72
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 19
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            23
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "SaveImage",
+      "pos": [
+        560,
+        530
+      ],
+      "size": [
+        270,
+        316
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [],
+      "title": "save_inpaint_after",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "w07_inpaint_after"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "ImagePadForOutpaint",
+      "pos": [
+        -760,
+        920
+      ],
+      "size": [
+        315,
+        228
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 23
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            24
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            25
+          ]
+        }
+      ],
+      "title": "outpaint_expand_sides",
+      "properties": {
+        "Node name for S&R": "ImagePadForOutpaint"
+      },
+      "widgets_values": [
+        256,
+        256,
+        80,
+        120,
+        24
+      ]
+    },
+    {
+      "id": 15,
+      "type": "VAEEncodeForInpaint",
+      "pos": [
+        -380,
+        940
+      ],
+      "size": [
+        260,
+        128
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 24
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 25
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            26
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEEncodeForInpaint"
+      },
+      "widgets_values": [
+        12
+      ]
+    },
+    {
+      "id": 16,
+      "type": "KSampler",
+      "pos": [
+        -80,
+        900
+      ],
+      "size": [
+        315,
+        317.3125
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 17
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 21
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 22
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 26
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            27
+          ]
+        }
+      ],
+      "title": "outpaint_sampler",
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        24071377,
+        "fixed",
+        30,
+        6.5,
+        "dpmpp_2m",
+        "karras",
+        0.86
+      ]
+    },
+    {
+      "id": 17,
+      "type": "VAEDecode",
+      "pos": [
+        280,
+        920
+      ],
+      "size": [
+        225,
+        72
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 27
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            28
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 18,
+      "type": "SaveImage",
+      "pos": [
+        536.0814838507001,
+        908.0067903208917
+      ],
+      "size": [
+        270,
+        316
+      ],
+      "flags": {},
+      "order": 17,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 28
+        }
+      ],
+      "outputs": [],
+      "title": "save_outpaint_after",
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "w07_outpaint_after"
+      ]
+    }
   ],
-  "tests": {
-    "img2img_denoise": [
-      0.35,
-      0.5,
-      0.65
+  "links": [
+    [
+      1,
+      1,
+      0,
+      6,
+      0,
+      "MODEL"
     ],
-    "inpaint_zone": "hero silhouette and edge cleanup",
-    "outpaint_direction": "right and top"
-  },
-  "selected_targets": [
-    "img2img-before",
-    "img2img-after",
-    "inpaint-before",
-    "inpaint-after",
-    "outpaint-after"
+    [
+      2,
+      1,
+      1,
+      2,
+      0,
+      "CLIP"
+    ],
+    [
+      3,
+      1,
+      1,
+      3,
+      0,
+      "CLIP"
+    ],
+    [
+      4,
+      1,
+      2,
+      5,
+      1,
+      "VAE"
+    ],
+    [
+      5,
+      2,
+      0,
+      6,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      3,
+      0,
+      6,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      7,
+      4,
+      0,
+      5,
+      0,
+      "IMAGE"
+    ],
+    [
+      8,
+      5,
+      0,
+      6,
+      3,
+      "LATENT"
+    ],
+    [
+      9,
+      1,
+      0,
+      11,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      6,
+      0,
+      7,
+      0,
+      "LATENT"
+    ],
+    [
+      11,
+      7,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      1,
+      2,
+      7,
+      1,
+      "VAE"
+    ],
+    [
+      13,
+      2,
+      0,
+      11,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      14,
+      3,
+      0,
+      11,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      9,
+      0,
+      10,
+      0,
+      "IMAGE"
+    ],
+    [
+      16,
+      9,
+      1,
+      10,
+      2,
+      "MASK"
+    ],
+    [
+      17,
+      1,
+      0,
+      16,
+      0,
+      "MODEL"
+    ],
+    [
+      18,
+      10,
+      0,
+      11,
+      3,
+      "LATENT"
+    ],
+    [
+      19,
+      11,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      20,
+      1,
+      2,
+      10,
+      1,
+      "VAE"
+    ],
+    [
+      21,
+      2,
+      0,
+      16,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      22,
+      3,
+      0,
+      16,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      23,
+      12,
+      0,
+      13,
+      0,
+      "IMAGE"
+    ],
+    [
+      24,
+      14,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ],
+    [
+      25,
+      14,
+      1,
+      15,
+      2,
+      "MASK"
+    ],
+    [
+      26,
+      15,
+      0,
+      16,
+      3,
+      "LATENT"
+    ],
+    [
+      27,
+      16,
+      0,
+      17,
+      0,
+      "LATENT"
+    ],
+    [
+      28,
+      17,
+      0,
+      18,
+      0,
+      "IMAGE"
+    ]
   ],
-  "notes_ref": "logs/workflow-notes.md"
+  "groups": [
+    {
+      "id": 1,
+      "title": "img2img denoise tests: 0.35 / 0.55 / 0.75",
+      "bounding": [
+        -800,
+        100,
+        1400,
+        360
+      ],
+      "color": "#3f789e",
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "inpaint: foreground memory shard repair",
+      "bounding": [
+        -800,
+        500,
+        1400,
+        340
+      ],
+      "color": "#8a6f3d",
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "outpaint: extend left/right + foreground",
+      "bounding": [
+        -800,
+        880,
+        1400,
+        340
+      ],
+      "color": "#7a4f8f",
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "w07_notes": {
+      "source_frame": "outputs/selected/hw4/02-w04-location-archive-hub.png",
+      "selected_outputs": "outputs/selected/hw7/",
+      "denoise_tests": [
+        0.35,
+        0.55,
+        0.75
+      ],
+      "chosen_img2img_denoise": 0.55,
+      "inpaint_zone": "lower-right foreground memory shard / noisy lamp area",
+      "outpaint_direction": "left and right expansion, slight foreground expansion"
+    },
+    "ds": {
+      "scale": 2.428244278928652,
+      "offset": [
+        -297.3832945290965,
+        -853.7755036304061
+      ]
+    },
+    "frontendVersion": "1.43.18"
+  },
+  "version": 0.4
 }

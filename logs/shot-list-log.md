@@ -68,15 +68,15 @@
 >
 > ---
 >
-> ## Shot 05: Anchor Персонаж (Hero Portrait — Elian)
+> ## Shot 05: Легендарный предмет (Item Icon — Heart of the Moon)
 >
 > |Параметр|Значение|
 > |---|---|
-> |**Название**|Элиан — Хранитель Грани (базовый персонажный кадр)|
-> |**Описание кадра**|Поясной портрет героя Элиана в ночном режиме. Тёмный плащ с капюшоном, читаемый силуэт лица, на груди светится лунный талисман (#ffa800). На фоне — тёмный лес (#191c21) с мягкими небесными акцентами (#88ccff). Композиция показывает героя как главный anchor серии A/B.|
-> |**Настроение**|Напряжённый, собранный, с лунной магией и ощущением надежды|
-> |**Технические детали**|Разрешение: 1024x1024  <br>Стиль: Character concept, pixel art  <br>Ракурс: 3/4, поясной портрет  <br>Референсы: Hyper Light Drifter, Stardew Valley|
-> |**Промпт (EN)**|`pixel art hero portrait, Elian guardian-farmer, dark cloak #1a2a4a, hooded face, lunar talisman on chest glowing #ffa800, subtle #88ccff rim light, dark #191c21 forest background, readable silhouette, retro 32bit style, atmospheric but clean composition --ar 1:1 --v 6`|
+> |**Название**|Сердце Луны (легендарный артефакт)|
+> |**Описание кадра**|Иконка легендарного предмета в инвентарном стиле: кристалл в форме сердца с внутренним янтарным свечением (#ffa800), тонкие лунные частицы вокруг, редкая рамка в фиолетовом тоне. Фон — тёмный, чтобы силуэт предмета читался в малом размере.|
+> |**Настроение**|Мистический, редкий, ценный, «главная цель прогрессии».|
+> |**Технические детали**|Разрешение: 1024x1024 (с последующим ресайзом до 64x64)  <br>Стиль: Pixel Art item icon  <br>Композиция: фронтальная симметрия  <br>Референсы: Moonlighter, Hyper Light Drifter (item readability)|
+> |**Промпт (EN)**|`pixel art item icon 64x64, Heart of the Moon artifact, pulsing golden #ffa800 heart-shaped crystal, glowing lunar particles around, purple relic rarity border, dark #191c21 background with faint tree silhouettes, pixel text "HEART OF THE MOON" below, magical valuable atmosphere, game inventory style, retro pixel art --ar 1:1 --v 6`|
 >
 > ---
 >
@@ -88,5 +88,5 @@
 > |**02**|Лунный танец|Combat|1920x1080|#191c21, #ffa800, #ff4444|📝 Готов к генерации|
 > |**03**|Тьма победила|UI Screen|1920x1080|#000000, #ff4444, #ffa800|📝 Готов к генерации|
 > |**04**|Хранитель Чёрной Луны|Boss Sprite|1920x1080|#191c21, #ffa800, #9944ff|📝 Готов к генерации|
-> |**05**|Элиан — Anchor Portrait|Character|1024x1024|#191c21, #ffa800, #88ccff|📝 Готов к генерации|
+> |**05**|Сердце Луны (легендарный предмет)|Item Icon|1024x1024 → 64x64|#191c21, #ffa800, #9944ff|📝 Готов к генерации|
 

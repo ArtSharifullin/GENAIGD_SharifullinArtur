@@ -10,4 +10,7 @@ USP: днем игрок развивает ферму и связи с жите
 - `logs/gdd-log.md` - журнал итераций и решений по геймдизайну.
 - `logs/workflow-notes.md` - заметки по генерациям, параметрам и отбору.
 - `style/Style-bible.md` - визуальные правила и baseline стиля.
-- `outputs/selected/` - отобранные результаты генераций.
+- `outputs/selected/` — отобранные результаты генераций (W04–W08).
+- `images/selected/` — ранние SDXL-кадры (W04, seed 42424242).
+- `shots/shot-list.md` — скрингены и Control plan.
+- `logs/comfyui-missing-assets-guide.md` — промпты для недостающих генераций в ComfyUI.
