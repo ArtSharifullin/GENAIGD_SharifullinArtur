@@ -156,7 +156,7 @@ Load Checkpoint → CLIP Text Encode (Positive) → KSampler → VAE Decode → 
     
 - **Base model:** SDXL Base 1.0
     
-- **Workflow:** `w05-style-series-sdxl.json`
+- **Workflow:** `w05_flux_style_series.json` (файл в `workflows/`; SDXL-прогоны A/B — seed 42424246–42424255)
     
 - **Fixed parameters:** CFG Scale (7.0), Steps (30), Sampler (DPM++ 2M Karras), Aspect ratio (1:1), Seed range (42424246–42424255)
     
@@ -325,7 +325,7 @@ pixel art hero full-body, Elian guardian-farmer, hard contrast direction, sharp 
 
 ### Использованный workflow
 - Tool: **локальный ComfyUI** (по выбору студента)
-- Workflow: `workflows/w08_controlnet_depth_canny.json` — экспорт после сборки (см. `workflows/README-w07-w08.md`)
+- Workflow: `workflows/w08_controlnet_depth_canny.json` — см. `workflows/README.md`
 - Model: SDXL Base 1.0 + ControlNet Depth / Canny SDXL
 - Control mode: Depth strength ~0.8, Canny ~0.7
 
@@ -377,4 +377,13 @@ pixel art hero full-body, Elian guardian-farmer, hard contrast direction, sharp 
    - `outputs/selected/09-moon-lord-upscale-after.png`
 5. Коротко дописать вывод по качеству: что улучшилось и что не исправилось.
 
-**Итог:** W09 аналитическая часть готова, следующий шаг — практический simple upscale Мун Лорда.
+### Optional simple upscale test (выполнено)
+
+- **Source:** `images/selected/04_moon_lord_boss_seed42424242.png`
+- **Workflow:** `w09_simple_upscale_sdxl.json`
+- **Before / after:** `outputs/selected/09-moon-lord-upscale-before.png`, `09-moon-lord-upscale-after.png`
+- **Что улучшилось:** плотность пикселей, читаемость силуэта босса и кольца Луны на большом разрешении.
+- **Что не исправилось:** композиция, масштаб игрока внизу, AI-артефакты мелких деталей — нужен отдельный outpaint (см. comfyui-missing-assets-guide).
+- **Готовность:** after — кандидат в final selected; before — только для сравнения.
+
+**Итог W09:** аналитика + upscale босса готовы; IP-Adapter / Klein — по доступу к серверу; следующий прогон — outpaint SH04 и canny-локация.

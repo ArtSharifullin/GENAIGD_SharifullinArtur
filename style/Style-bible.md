@@ -21,7 +21,7 @@
 
 - **Model:** SDXL Base 1.0
     
-- **Workflow:** `w05-style-series-sdxl.json`
+- **Workflow:** `w05_flux_style_series.json` (Flux template в cloud; SDXL-логика A/B — в `logs/workflow-notes.md` § Lesson 05)
     
 - **Aspect ratio:** 1:1 (512x512 → upscale до 1024x1024)
     

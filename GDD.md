@@ -791,7 +791,7 @@ text
 | Финал | Simple upscale | hero base, босс после fix |
 
 **Референсы:** только отдельные качества (палитра, свет, силуэт) — см. `style/Style-bible.md` → Reference rules.  
-**Upscale:** `01-w06-hero-base.png`, `08-depth-scene-01.png` (после чистки шума) и будущий SH04-босс после отдельного outpaint-повтора.
+**Upscale:** `09-moon-lord-upscale-after.png` (босс, W09); кандидаты: `01-w06-hero-base.png`, `08-depth-scene-01.png` (после fix first). SH04 outpaint — см. `logs/comfyui-missing-assets-guide.md`.
 
 ## 12.4 VFX (Визуальные эффекты)
 

@@ -1,10 +1,8 @@
 # Reports
 
-Промежуточные и финальные отчёты курса.
-
 | Файл | Назначение |
 |------|------------|
-| `YYYY-MM-DD-midterm.md` | Отчёт к midterm |
-| `YYYY-MM-DD-final.md` | Финальный отчёт + «как воспроизвести» |
+| [2026-05-28-midterm.md](2026-05-28-midterm.md) | Midterm: что сделано, риски, план до final |
+| [2026-05-28-final.md](2026-05-28-final.md) | Final (черновик): deliverables, воспроизведение, test plan |
 
-Создайте отчёты перед защитой по шаблону из KB: `Информация/WIP/05 Чек-лист Midterm & Final.md`.
+Навигация проекта: [index.md](../index.md) · [final.md](../final.md)
